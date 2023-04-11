@@ -2,7 +2,7 @@
 
 
 void Pilha::criapilha(){
-
+    
 }
 
 bool Pilha::pilhavazia(){
@@ -18,5 +18,5 @@ void Pilha::desempilha(){
 }
 
 void Pilha::destroipilha(){
-    
+
 }
