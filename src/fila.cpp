@@ -1,71 +1,64 @@
-#include "fila.h"
 #include <iostream>
+#include "fila.h"
 using namespace std;
 
-const int MAX = 10; // tamanho máximo da fila
-
-FilaCircular::FilaCircular() {
-    frente = -1;
-    tras = -1;
+CircularQueue::CircularQueue() {
+    front = -1;
+    rear = -1;
 }
 
-bool FilaCircular::estaVazia() {
-    return (frente == -1 && tras == -1);
+bool CircularQueue::isEmpty() {
+    return front == -1 && rear == -1;
 }
 
-bool FilaCircular::estaCheia() {
-    return ((tras + 1) % MAX == frente);
+bool CircularQueue::isFull() {
+    return (rear + 1) % MAX_SIZE == front;
 }
 
-void FilaCircular::enfileirar(int item) {
-    if (estaCheia()) {
-        cout << "Erro: fila cheia\n";
+void CircularQueue::enqueue(int value) {
+    if (isFull()) {
+        cout << "Error: Queue is full\n";
         return;
     }
-
-    if (estaVazia()) {
-        frente = 0;
-        tras = 0;
+    if (isEmpty()) {
+        front = 0;
+        rear = 0;
     } else {
-        tras = (tras + 1) % MAX;
+        rear = (rear + 1) % MAX_SIZE;
     }
-
-    itens[tras] = item;
+    arr[rear] = value;
 }
 
-void FilaCircular::desenfileirar() {
-    if (estaVazia()) {
-        cout << "Erro: fila vazia\n";
+void CircularQueue::dequeue() {
+    if (isEmpty()) {
+        cout << "Error: Queue is empty\n";
         return;
-    }
-
-    if (frente == tras) {
-        frente = -1;
-        tras = -1;
+    } else if (front == rear) {
+        front = -1;
+        rear = -1;
     } else {
-        frente = (frente + 1) % MAX;
+        front = (front + 1) % MAX_SIZE;
     }
 }
 
-int FilaCircular::obterFrente() {
-    if (estaVazia()) {
-        cout << "Erro: fila vazia\n";
+int CircularQueue::getFront() {
+    if (isEmpty()) {
+        cout << "Error: Queue is empty\n";
         return -1;
     }
-
-    return itens[frente];
+    return arr[front];
 }
 
-void FilaCircular::imprimir() {
-    if (estaVazia()) {
-        cout << "Fila vazia\n";
+void CircularQueue::print() {
+    if (isEmpty()) {
+        cout << "Queue is empty\n";
         return;
     }
-
-    int i;
-    for (i = frente; i != tras; i = (i + 1) % MAX) {
-        cout << itens[i] << " ";
+    cout << "Front: " << front << ", Rear: " << rear << ", Elements: ";
+    int i = front;
+    while (i != rear) {
+        cout << arr[i] << " ";
+        i = (i + 1) % MAX_SIZE;
     }
-    cout << itens[i] << endl;
+    cout << arr[rear] << endl;
 }
-

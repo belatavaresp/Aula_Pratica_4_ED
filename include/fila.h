@@ -1,23 +1,21 @@
+#ifndef CIRCULARQUEUE_HPP
+#define CIRCULARQUEUE_HPP
 
-const int MAX = 10; // tamanho máximo da fila
+const int MAX_SIZE = 10;
 
-class FilaCircular {
-private:
-    int itens[MAX];
-    int frente, tras;
-
+class CircularQueue {
 public:
-    FilaCircular();
-
-    bool estaVazia();
-
-    bool estaCheia();
-
-    void enfileirar(int);
-
-    void desenfileirar();
-
-    int obterFrente();
-
-    void imprimir();
+    int arr[MAX_SIZE];
+    int front;
+    int rear;
+    
+    CircularQueue();
+    bool isEmpty();
+    bool isFull();
+    void enqueue(int value);
+    void dequeue();
+    int getFront();
+    void print();
 };
+
+#endif

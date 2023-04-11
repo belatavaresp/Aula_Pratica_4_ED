@@ -1,9 +1,20 @@
-//criapilha, pilhavazia, empilha, desempilha e destroipilha 
-class Pilha{
+#ifndef STACK_HPP
+#define STACK_HPP
+
+#include "fila.h"
+
+class Stack {
+private:
+    CircularQueue cq;
+
 public:
-    void criapilha();
-    bool pilhavazia();
-    void empilha(int);
+    Stack();
+    bool pilhaVazia();
+    void empilha(int value);
     void desempilha();
-    void destroipilha();
+    void destroiPilha();
+    void imprimir();
+    CircularQueue getFila();
 };
+
+#endif
